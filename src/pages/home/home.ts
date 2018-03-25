@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
-import { CategoriasPage } from '../categorias/categorias';
+import { CategoriaPage } from '../categoria/categoria';
 import { FormularioPage } from '../formulario/formulario';
 
 @IonicPage()
@@ -16,16 +16,14 @@ export class HomePage {
 
   ionViewWillEnter(){
     this.menu.swipeEnable(false);
-
   }
-
   ionViewDidEnter(){
     this.menu.swipeEnable(true);
   }
 
   login() {
    // console.log("Olá estou no console...")
-    this.navCtrl.setRoot('CategoriasPage');
+    this.navCtrl.setRoot('CategoriaPage');
   }
 
   openFormulario() {

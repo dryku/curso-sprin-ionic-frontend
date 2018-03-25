@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>
+<!--
+      <ion-buttons start>
+          <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+      </ion-buttons>  
+-->
+    <ion-title>Categorias</ion-title>
+  </ion-navbar>
+
+
+</ion-header>
+  
+  <ion-content padding>
+    <p>Pagina de Categorias</p>
+  
+    <ion-list>
+      <button ion-item *ngFor="let item of itens" >
+        <ion-thumbnail item-start >
+          <img src="img/thumbnail-totoro.png">
+        </ion-thumbnail>
+        <h2> {{ item.nmcategoria }}</h2>
+      </button>
+    </ion-list>
+
+</ion-content>
