@@ -31,8 +31,8 @@ export class CategoriaPage {
   ionViewDidLoad() {
     this.categoriaService.buscarCategorias()
           .subscribe(response => {
-           // this.itens = response;
-            console.log(response);
+            this.itens = response;
+         //   console.log(response);
           },
           error => {
             console.log(error);
