@@ -14,18 +14,3 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-ion-menu {
-border-color: rgb(214, 177, 11);
-background-color: crimson;
-background-image: none;
-
-}
-
-ion-menu-content {
-background-color: #00A5FF;
-color : #fff;
-text-align: center;
-font-size: 18px;
-font-weight: 800;
-padding : 20px;
-}

@@ -30,6 +30,9 @@ export class HomePage {
     this.navCtrl.setRoot('FormularioPage');
   }
 
-  ion
-
+  signup(){
+    console.log("Passou por aqui");
+    this.navCtrl.push('SignupPage');
+}
+  
 }

@@ -17,7 +17,6 @@ export class CategoriaService{
 
     buscarCategorias() : Observable<CategoriaDTO[]> {
         return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/categorias`);
-//      return this.http.get<CategoriaDTO[]>("http://localhost:8080/categorias")
 //     .map((resposta: Response) => resposta.json());
     }
     findAll() : Observable<CategoriaDTO[]>  {
