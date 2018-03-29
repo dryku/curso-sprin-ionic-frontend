@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CidadeService } from '../../services/domain/cidade.service';
+import { EstadoService } from '../../services/domain/estado.service';
+import { CidadeDTO } from '../../models/cidade.dto';
+import { EstadoDTO } from '../../models/estado.dto';
 
 @IonicPage()
 @Component({
@@ -10,11 +14,16 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class SignupPage {
 
   formGroup: FormGroup;
+  cidades: CidadeDTO[];
+  estados: EstadoDTO[];
 
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
-     public formBild: FormBuilder) {
+     public formBild: FormBuilder,
+     public cidadeService : CidadeService,
+     public estadoService : EstadoService
+  ) {
   
       this.formGroup = this.formBild.group({
         nmcliente : ["Adriano enviado", [Validators.required]],
@@ -37,9 +46,31 @@ export class SignupPage {
     }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
+    this.estadoService.buscarEstados()
+      .subscribe(response => {
+        this.estados = response;
+        this.formGroup.controls.estadoId.setValue(this.estados[0].idestado);
+        this.updateCidades();
+      },
+      error => {
+        console.log('Erro ao Carregar estado');
+      })
+    
   }
  
+
+  updateCidades(){
+      let estado_id = this.formGroup.value.estadoId;
+      this.cidadeService.buscarCidades(estado_id)
+        .subscribe(response =>{
+          this.cidades = response;
+          this.formGroup.controls.cidadeId.setValue(null);
+        },
+        error => {
+          console.log('Erro ao Atualizar Cidades')
+        }) 
+  }
+
   signupUser(){
     console.log("Enviou o Form")
   }

@@ -5,7 +5,6 @@ import { CategoriaDTO } from "../../models/Categoria.dto";
 //import { Observable } from "rxjs/Observable";
 import { Observable } from "rxjs/Rx";
 
-
 import "rxjs/operator/map";
 import "rxjs/operator/retry";
 
@@ -19,6 +18,7 @@ export class CategoriaService{
         return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/categorias`);
 //     .map((resposta: Response) => resposta.json());
     }
+    
     findAll() : Observable<CategoriaDTO[]>  {
         return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/categorias`);
      }
