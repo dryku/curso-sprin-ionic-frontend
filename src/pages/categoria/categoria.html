@@ -12,11 +12,10 @@
 -->
     <ion-title>Categorias</ion-title>
   </ion-navbar>
-
+  <ion-toolbar color="primary">
+      <ion-searchbar > </ion-searchbar>
+    </ion-toolbar>
 </ion-header>
-  <div class="bar bar-subheader">
-    <h2 class="title">Sub Header</h2>
-  </div>
 <!--  
 <ion-header-bar class="bar-subheader">
     <div class="item item-input-item-search">
@@ -27,7 +26,6 @@
 -->
 
 <ion-content padding>
-    <p>Pagina de Categorias</p>
   
     <ion-list>
       <button ion-item *ngFor="let item of itens" >

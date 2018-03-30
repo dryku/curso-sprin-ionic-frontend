@@ -33,7 +33,7 @@ export class SignupPage {
    //   idendeco : ["1", [Validators.required]],
         logradouro : ["Rua teste", [Validators.required]],
         numero : ["10", [Validators.required]],
-        complemento : ["viela", [Validators.required]],
+        complemento : ["viela", []],
         bairro : ["Nazaré", [Validators.required]],
         cep : ["08142460", [Validators.required]],
         telefone1 : ["25713400", [Validators.required]],
@@ -53,7 +53,7 @@ export class SignupPage {
         this.updateCidades();
       },
       error => {
-        console.log('Erro ao Carregar estado');
+ //       console.log('Erro ao Carregar estado');
       })
     
   }
@@ -67,8 +67,8 @@ export class SignupPage {
           this.formGroup.controls.cidadeId.setValue(null);
         },
         error => {
-          console.log('Erro ao Atualizar Cidades')
-        }) 
+   //       console.log('Erro ao Atualizar Cidades')
+        }); 
   }
 
   signupUser(){
