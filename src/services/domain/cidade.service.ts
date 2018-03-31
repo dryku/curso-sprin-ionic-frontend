@@ -5,7 +5,6 @@ import { CidadeDTO } from "../../models/cidade.dto";
 //import { Observable } from "rxjs/Observable";
 import { Observable } from "rxjs/Rx";
 
-
 import "rxjs/operator/map";
 import "rxjs/operator/retry";
 

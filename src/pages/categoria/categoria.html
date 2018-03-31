@@ -12,7 +12,7 @@
 -->
     <ion-title>Categorias</ion-title>
   </ion-navbar>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
       <ion-searchbar > </ion-searchbar>
     </ion-toolbar>
 </ion-header>
@@ -30,7 +30,7 @@
     <ion-list>
       <button ion-item *ngFor="let item of itens" >
         <ion-thumbnail item-start >
-          <img src="img/thumbnail-totoro.png">
+            <img src="assets/imgs/carrinho.png" alt="carrinho">
         </ion-thumbnail>
         <h2> {{ item.nmcategoria }}</h2>
       </button>

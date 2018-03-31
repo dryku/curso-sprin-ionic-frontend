@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
 import { CategoriaPage } from '../categoria/categoria';
-import { FormularioPage } from '../formulario/formulario';
 
 @IonicPage()
 @Component({
@@ -24,10 +23,6 @@ export class HomePage {
   login() {
    // console.log("Olá estou no console...")
     this.navCtrl.setRoot('CategoriaPage');
-  }
-
-  openFormulario() {
-    this.navCtrl.setRoot('FormularioPage');
   }
 
   signup(){

@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CidadeService } from '../../services/domain/cidade.service';
 import { EstadoService } from '../../services/domain/estado.service';
 import { CidadeDTO } from '../../models/cidade.dto';
 import { EstadoDTO } from '../../models/estado.dto';
+import { ClienteService } from '../../services/domain/cliente.service';
+
+import { Subscriber } from 'rxjs/Rx';
 
 @IonicPage()
 @Component({
@@ -22,7 +25,9 @@ export class SignupPage {
      public navParams: NavParams,
      public formBild: FormBuilder,
      public cidadeService : CidadeService,
-     public estadoService : EstadoService
+     public estadoService : EstadoService,
+     public clienteService : ClienteService,
+     public alertCtrl : AlertController
   ) {
   
       this.formGroup = this.formBild.group({
@@ -72,7 +77,31 @@ export class SignupPage {
   }
 
   signupUser(){
-    console.log("Enviou o Form")
-  }
+    console.log(this.formGroup.value)
+    this.clienteService.inserirCliente(this.formGroup.value)
+        .subscribe(response => {
+          this.inserirClientetOK();
+        },
+        error => {
+          //this.inserirClientetOK();
+         console.log("Erro ao inserir Cliente....... " + error);
+        });
+    }
 
+    inserirClientetOK(){
+      let alert = this.alertCtrl.create({
+        title: 'Sucesso!',
+        message: 'Cadastro efetuado com sucesso!',
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              this.navCtrl.pop();
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
 }

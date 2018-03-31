@@ -73,11 +73,10 @@
     <ion-input formControlName="telefone3" type="text"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label stacked> Estado* </ion-label>
+    <ion-label stacked > Estado* </ion-label>
     <ion-select formControlName="estadoId" (ionChange)="updateCidades()" >
       <ion-option *ngFor="let estado of estados, first as f" [value]="estado.idestado" [selected]="f" > {{estado.nome}}</ion-option>
- <!--     <ion-option value="2"> São Paulo</ion-option> -->
-   </ion-select>
+    </ion-select>
   </ion-item>
   <ion-item>
     <ion-label stacked> Cidade* </ion-label>
@@ -90,3 +89,4 @@
 </form>
 
 </ion-content>
+ 
