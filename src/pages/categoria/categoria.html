@@ -28,10 +28,11 @@
 <ion-content padding>
   
     <ion-list>
-      <button ion-item *ngFor="let item of itens" >
+      <button ion-item *ngFor="let item of itens" (click)="showProdutos(item.idcategoria)">
         <ion-thumbnail item-start >
             <img src="assets/imgs/carrinho.png" alt="carrinho">
         </ion-thumbnail>
+        <h2> {{ item.idcategoria }}</h2>
         <h2> {{ item.nmcategoria }}</h2>
       </button>
     </ion-list>

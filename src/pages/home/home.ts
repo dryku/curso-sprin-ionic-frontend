@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, MenuController } from 'ionic-angular';
+import { NavController, IonicPage, MenuController, AlertController } from 'ionic-angular';
 import { CategoriaPage } from '../categoria/categoria';
+import { CredenciaisDTO } from '../../models/Credenciais.dto';
+import { AuthService } from '../../services/auth.service';
 
 @IonicPage()
 @Component({
@@ -9,25 +11,66 @@ import { CategoriaPage } from '../categoria/categoria';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public menu: MenuController) {
+  creds : CredenciaisDTO = {
+    email : "driku.ti@gmail.com",
+    senha : "123"
+  };
+
+
+  constructor(public navCtrl: NavController, 
+              public menu: MenuController,
+              public alertCtrl: AlertController,
+              public auth: AuthService) {
 
   }
 
   ionViewWillEnter(){
     this.menu.swipeEnable(false);
   }
-  ionViewDidEnter(){
+
+  ionViewDidLeave(){
     this.menu.swipeEnable(true);
   }
 
+// APROVEITANDO O USUARIO LOGADO
+  ionViewDidEnter(){
+    this.auth.refreshToken().
+    subscribe(response => {
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot('CategoriaPage');
+    },
+    erro => {});
+  
+  }
+
+
+
   login() {
-   // console.log("Olá estou no console...")
-    this.navCtrl.setRoot('CategoriaPage');
+    this.auth.authenticate(this.creds).
+    subscribe(response => {
+ //    console.log(response.headers.get('Authorization')); 
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot('CategoriaPage');
+    },
+    erro => {
+      //this.presentAlert();
+    });
+    //console.log(this.creds)
+
   }
 
   signup(){
-    console.log("Passou por aqui");
     this.navCtrl.push('SignupPage');
 }
   
+presentAlert() {
+  let alert = this.alertCtrl.create({
+    title: 'Erro de Acesso....',
+    subTitle: 'E-mail ou Senha inválido!',
+    buttons: ['Fechar']
+  });
+  alert.present();
+}
+
+
 }

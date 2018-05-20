@@ -33,8 +33,9 @@ export class SignupPage {
       this.formGroup = this.formBild.group({
         nmcliente : ["Adriano enviado", [Validators.required]],
         emailcliente : ["driku.tites@gmail.com", [Validators.required, Validators.email]],
+        senha : ["123", [Validators.required]],
         tipoCliente : ["1", [Validators.required]],
-        cpfOuCnpj : ["3014758485", [Validators.required, Validators.minLength(9), Validators.maxLength(14)]],
+        cpfOuCnpj : ["30147584850", [Validators.required, Validators.minLength(9), Validators.maxLength(14)]],
    //   idendeco : ["1", [Validators.required]],
         logradouro : ["Rua teste", [Validators.required]],
         numero : ["10", [Validators.required]],
@@ -44,7 +45,7 @@ export class SignupPage {
         telefone1 : ["25713400", [Validators.required]],
         telefone2 : [null, []],
         telefone3 : [null, []],
-        cidadeId : [null, [Validators.required]],
+        cidade : [null, [Validators.required]],
         estadoId : [null, [Validators.required]]
       
       });
@@ -69,7 +70,7 @@ export class SignupPage {
       this.cidadeService.buscarCidades(estado_id)
         .subscribe(response =>{
           this.cidades = response;
-          this.formGroup.controls.cidadeId.setValue(null);
+          this.formGroup.controls.cidade.setValue(null);
         },
         error => {
    //       console.log('Erro ao Atualizar Cidades')
@@ -77,14 +78,14 @@ export class SignupPage {
   }
 
   signupUser(){
-    console.log(this.formGroup.value)
     this.clienteService.inserirCliente(this.formGroup.value)
         .subscribe(response => {
           this.inserirClientetOK();
         },
         error => {
-          //this.inserirClientetOK();
-         console.log("Erro ao inserir Cliente....... " + error);
+          this.ErroAlert(error);
+          console.log(this.formGroup.value + " - " + error)
+          console.log("Erro ao inserir Cliente....... " + error);
         });
     }
 
@@ -104,4 +105,18 @@ export class SignupPage {
       });
       alert.present();
     }
+
+
+    ErroAlert(erro : any) {
+      let alert = this.alertCtrl.create({
+
+        title: 'Erro!!',
+        subTitle: 'Erro ao realizar o cadastro! \n'+erro,
+        buttons: ['Fechar'],
+        cssClass:'alert-danger'
+
+      });
+      alert.present();
+    }
+    
 }

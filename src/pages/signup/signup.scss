@@ -1,21 +1,20 @@
 page-signup {
-    .danger{
-        color: red;
-    }
-
     ion-alert {
         &.alert-warning {
           .alert-head {
             background: map-get($colors, warning);
-            color: #fff;
-            margin-bottom: 10px;
+            text-decoration-color: map-get($colors, warning);
+            color: #558fff;
+            margin-bottom: 1000px;
           }
         }
         &.alert-danger {
           .alert-head {
             background: map-get($colors, danger);
-            color: chocolate;
-            margin-bottom: 10px;
+            text-decoration-color: map-get($colors, warning);
+
+            color:#e74c3c;
+            margin-bottom: 1000px;
           }
         }
         &.alert-success {
@@ -27,5 +26,7 @@ page-signup {
         }
       
       }
-
 }
+
+
+
