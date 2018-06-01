@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { componentFactoryName } from '@angular/compiler';
 import { AuthService } from '../services/auth.service';
+import { StorageService } from '../services/storage.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class MyApp {
   constructor(public platform: Platform, 
     public statusBar: StatusBar, 
     public splashScreen: SplashScreen,
-    public auth: AuthService
+    public auth: AuthService,
+    public storage: StorageService
   ) {
     this.initializeApp();
 
@@ -27,6 +29,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: 'HomePage' },
       { title: 'Profile', component: 'ProfilePage' },
+      { title: 'Carrinho de Compra', component: 'CartPage' },
       { title: 'Categoria', component: 'CategoriaPage' },
       { title: 'Logout', component: '' }
 
@@ -48,6 +51,7 @@ export class MyApp {
     switch(page.title){
       case "Logout": 
       this.auth.logout();
+//      this.storage.limpaCarrinho();
       this.nav.setRoot('HomePage');
       break;
 

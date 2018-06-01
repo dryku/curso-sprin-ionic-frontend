@@ -18,7 +18,6 @@ export class ProdutosPage {
     public produtoService: ProdutoService) {  }
 
   ionViewDidLoad() {
-  
     let categoria_id = this.navParams.get('categoria_id');
     this.produtoService.buscarCategorias(categoria_id)
         .subscribe(response =>{
@@ -27,8 +26,8 @@ export class ProdutosPage {
         error => {});
   }
 
-showDetalhe(){
-  this.navCtrl.push('ProdutoDetalhePage');
+showDetalhe(produto_id : string){
+  this.navCtrl.push('ProdutoDetalhePage', {produto_id: produto_id});
 }
 
 }

@@ -13,9 +13,12 @@ export class ProdutoService{
     constructor(public http: HttpClient) {
     }
 
+    buscarProdutoId(produto_id: string)  {
+        return this.http.get<ProdutoDTO>(`${API_CONFIG.baseUrl}/produtos/${produto_id}`);
+    }
+
     buscarCategorias(categoria_id: string)  {
         return this.http.get(`${API_CONFIG.baseUrl}/produtos/?categorias=${categoria_id}`);
-//     .map((resposta: Response) => resposta.json());
     }
     
 
