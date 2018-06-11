@@ -1,4 +1,4 @@
 export interface RefDTO {
-    id : string;
+    idProduto : string;
 //    idendereco : string; 
 } 

@@ -9,8 +9,8 @@ export interface PedidoDTO {
 //    enderecoDeEntrega: RefDTO;
 
     cliente: RefClienteDTO;
-    enderecoDeEntrega: RefEnderecoDTO;
-    pagamento: PagamentoDTO;
+    enderecoEntrega: RefEnderecoDTO;
+    pgto: PagamentoDTO;
     itens: ItemPedidoDTO[];
 
 }

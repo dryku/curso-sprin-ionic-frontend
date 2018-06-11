@@ -11,8 +11,7 @@ export class ClienteService{
     constructor(public http: HttpClient, public storage: StorageService) {
     }
 
-//    buscarClienteEmail(email : string) : Observable<ClienteDTO> {   
-    findByEmail(email : string) : Observable<ClienteDTO> {   
+//    findByEmail(email : string) : Observable<ClienteDTO> {   
 // --------------------  INSERINDO CABECARIO SEM O INTERCEPTOR --------------------        
 //        let token = this.storage.getLocalUser().token;
 //        let authHeader = new HttpHeaders({"Authorization": "Bearer " + token});  
@@ -20,12 +19,20 @@ export class ClienteService{
 //            `${API_CONFIG.baseUrl}/clientes/email?value=${email}`,
 //            {'headers': authHeader});
 
-        return  this.http.get<ClienteDTO>(
-            `${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
+//        return  this.http.get<ClienteDTO>(
+//            `${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
+//}
 
 
-}
+    findById(id : string) {   
+          return  this.http.get(`${API_CONFIG.baseUrl}/clientes/${id}`);
+    }
+
     
+    findByEmail(email : string) {   
+        return  this.http.get(`${API_CONFIG.baseUrl}/clientes/email?value=${email}`);
+    }
+  
     inserirCliente(obj: ClienteDTO) {
         return this.http.post(
             `${API_CONFIG.baseUrl}/clientes`,
