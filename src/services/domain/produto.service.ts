@@ -17,8 +17,9 @@ export class ProdutoService{
         return this.http.get<ProdutoDTO>(`${API_CONFIG.baseUrl}/produtos/${produto_id}`);
     }
 
-    buscarCategorias(categoria_id: string)  {
-        return this.http.get(`${API_CONFIG.baseUrl}/produtos/?categorias=${categoria_id}`);
+    buscarCategorias(categoria_id: string, pagina: number = 0, qtdlinha: number = 24)  {
+//        return this.http.get(`${API_CONFIG.baseUrl}/produtos/?categorias=${categoria_id}`);
+        return this.http.get(`${API_CONFIG.baseUrl}/produtos/?categorias=${categoria_id}&pagina=${pagina}&qtdlinha=${qtdlinha}`);
     }
     
 

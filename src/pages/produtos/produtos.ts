@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ProdutoDTO } from '../../models/produto.dto';
 import { ProdutoService } from '../../services/domain/produto.service';
 
@@ -11,23 +11,63 @@ import { ProdutoService } from '../../services/domain/produto.service';
 })
 export class ProdutosPage {
 
-  items : ProdutoDTO[];
+  items : ProdutoDTO[] = [];
+  pagina : number = 0;
 
-  constructor(public navCtrl: NavController, 
+  constructor(
+    public navCtrl: NavController, 
     public navParams: NavParams,
-    public produtoService: ProdutoService) {  }
-
-  ionViewDidLoad() {
-    let categoria_id = this.navParams.get('categoria_id');
-    this.produtoService.buscarCategorias(categoria_id)
-        .subscribe(response =>{
-          this.items = response["content"];
-        },
-        error => {});
+    public produtoService: ProdutoService,
+    public loadingCtrl: LoadingController) {
   }
 
-showDetalhe(produto_id : string){
-  this.navCtrl.push('ProdutoDetalhePage', {produto_id: produto_id});
-}
+  ionViewDidLoad() {
+    this.loadData();
+  }
 
+
+  loadData(){
+    let categoria_id = this.navParams.get('categoria_id');
+    let loader = this.presentLoading();
+    this.produtoService.buscarCategorias(categoria_id, this.pagina, 10)
+        .subscribe(response =>{
+          this.items = this.items.concat(response["content"]);
+          loader.dismiss();
+          console.log(this.pagina);
+          console.log(this.items);
+        },
+        error => {
+          loader.dismiss();
+        });
+  }
+
+  showDetalhe(produto_id : string){
+    this.navCtrl.push('ProdutoDetalhePage', {produto_id: produto_id});
+  }
+
+  presentLoading(){
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde...",
+    });
+    loader.present();
+    return loader;
+  }
+
+  doRefresh(refresher) {
+    this.pagina = 0;
+    this.items = [];
+    this.loadData();
+    setTimeout(() => {
+      console.log("Passou pelo refreshd");
+      refresher.complete();
+    }, 1000);
+  }
+
+  doInfinite(infiniteScroll) {
+    this.pagina++;
+    this.loadData();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
+  }
 }
